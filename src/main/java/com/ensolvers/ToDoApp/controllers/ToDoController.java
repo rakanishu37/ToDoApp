@@ -8,6 +8,7 @@ import com.ensolvers.ToDoApp.services.ToDoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/todo")
 @RequiredArgsConstructor
@@ -30,9 +33,11 @@ public class ToDoController {
     @GetMapping("")
     public ResponseEntity<ToDoDtoList> getAllTodo() {
         List<ToDo> toDos = toDoService.getAllToDo();
-        return toDos.isEmpty()
+        return !toDos.isEmpty()
                 ? ResponseEntity.ok(ToDoDtoList.fromToDoList(toDos))
-                : ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+                : ResponseEntity.status(HttpStatus.OK)
+                    .body(ToDoDtoList.builder()
+                        .toDos(new ArrayList<ToDoDtoResponse>()).build());
     }
 
     @PostMapping("")
