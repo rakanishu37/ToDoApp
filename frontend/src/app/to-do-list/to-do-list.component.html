@@ -1,0 +1,11 @@
+<div>
+    <ul>
+        <li *ngFor="let toDo of toDoList">
+            <app-to-do 
+                title={{toDo.title}}                
+                (checkboxValue)="onCheckboxChange($event)"
+                (edit)="onEdit($event)"
+                (delete)="onDelete($event)"></app-to-do>
+        </li>        
+    </ul>
+</div>
