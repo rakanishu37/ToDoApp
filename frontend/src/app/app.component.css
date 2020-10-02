@@ -1,0 +1,36 @@
+.container {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+.to-do-list {
+   margin: 1rem;
+   border: 0.2rem solid grey;   
+   width: 95vmin;
+}
+.to-do-list >*{
+   padding-left: 0.5rem;
+}
+.title {
+   font-size: 1.3rem;
+}
+.list {
+   padding: 0;
+   list-style: none;
+}
+
+.editWindow {
+   top: 50%;
+   left: 50%;
+   width: 100%;
+   height: 100%;
+   /*width: 95vmin;
+   height: 110vmin;*/
+   transform: translate(-50%,-50%);
+   position: absolute;
+   backdrop-filter: blur(3px);
+   background-color: rgba(255,255,255,.8);
+   
+}

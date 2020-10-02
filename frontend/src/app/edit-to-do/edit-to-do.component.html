@@ -1,0 +1,8 @@
+<div class="container">
+  <h2>{{ taskTitle }}</h2>
+  <input type="text" placeholder="{{ task }}" (input)="taskInputHandler($event)"/>
+  <div class="buttons">
+    <button class="save-button" (click)="saveHandler($event)">Save</button>
+    <button (click)="cancelHandler($event)">Cancel</button>
+  </div>
+</div>
