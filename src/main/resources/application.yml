@@ -1,8 +1,9 @@
 spring:
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
       format_sql: true
   datasource:
     url: jdbc:mysql://localhost:3306/todo_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Argentina/Buenos_Aires&createDatabaseIfNotExist=true
