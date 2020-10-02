@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ToDoDtoList {
-    private List<ToDoDtoResponse> toDos;
+    private List<ToDoDtoResponse> toDoList;
 
     public static ToDoDtoList fromToDoList(List<ToDo> toDoList) {
         return ToDoDtoList.builder()
-                .toDos(toDoList.stream()
+                .toDoList(toDoList.stream()
                         .map(ToDoDtoResponse::fromToDo)
                         .collect(Collectors.toList()))
                 .build();

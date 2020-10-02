@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.buttons {
+    margin-top: 1rem;
+}
+
+.save-button {
+    margin-right: 0.3rem;
+    background-color: #115293;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+form {
+    max-width: 30rem;
+}
+
+input {
+    width: 80%;
+    max-width: 80%;
+}
+
+h2 {
+    max-width: 80%;
+}

@@ -18,5 +18,5 @@ public class ToDoDto {
     @NotBlank(message = "Title can't be empty")
     private String title;
     @NotNull
-    private Boolean isMarked;
+    private Boolean complete;
 }

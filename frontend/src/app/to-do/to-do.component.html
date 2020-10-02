@@ -1,0 +1,10 @@
+<div class="item">
+    <div class="to-do-input">
+        <input id="todo" type="checkbox" [checked]="complete" (click)="inputCheckboxHandler($event)">
+        <label for="todo" class="to-do-title">{{title}}</label>
+    </div>
+    <div class="buttons">
+        <button type="button" (click)="editHandler($event)">Edit</button>
+        <button type="button" (click)="deleteHandler($event)">Delete</button>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    min-height: 1.5rem;
+}
+.to-do-title {
+    margin: 0 1rem;
+}
+.buttons {
+ display: flex;
+ flex-wrap: nowrap;
+}
+
+.buttons button {
+    border: none;
+    background: transparent;
+    color: #115293;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.to-do-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
