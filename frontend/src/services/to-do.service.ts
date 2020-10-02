@@ -34,14 +34,18 @@ export class ToDoService {
   }
 
   public getToDoList() {
-    return this.httpClient.get<{ toDoList: ToDo[] }>(this.todoListUrl);
+    return this.httpClient
+      .get<{ toDoList: ToDo[] }>(this.todoListUrl)
+      .pipe(catchError(this.error));
   }
 
   public createToDo(title: string) {
-    return this.httpClient.post<ToDo>(this.postTodoUrl, {
-      title,
-      complete: false,
-    });
+    return this.httpClient
+      .post<ToDo>(this.postTodoUrl, {
+        title,
+        complete: false,
+      })
+      .pipe(catchError(this.error));
   }
 
   public editToDo(toDo: ToDo) {
@@ -60,13 +64,16 @@ export class ToDoService {
 
   // Handle Errors
   private error(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    if (error.status === 400) {
+      alert("ToDo title can't be empty");
     }
-    console.log(errorMessage);
-    return throwError(errorMessage);
+    if (error.status === 409) {
+      alert('That task title is already used');
+    }
+    if (error.status === 500) {
+      alert('There is a problem with the server');
+    }
+
+    return throwError(error.message);
   }
 }
