@@ -32,12 +32,12 @@ public class ToDoController {
 
     @GetMapping("")
     public ResponseEntity<ToDoDtoList> getAllTodo() {
-        List<ToDo> toDos = toDoService.getAllToDo();
-        return !toDos.isEmpty()
-                ? ResponseEntity.ok(ToDoDtoList.fromToDoList(toDos))
+        List<ToDo> toDoList = toDoService.getAllToDo();
+        return !toDoList.isEmpty()
+                ? ResponseEntity.ok(ToDoDtoList.fromToDoList(toDoList))
                 : ResponseEntity.status(HttpStatus.OK)
                     .body(ToDoDtoList.builder()
-                        .toDos(new ArrayList<ToDoDtoResponse>()).build());
+                        .toDoList(new ArrayList<ToDoDtoResponse>()).build());
     }
 
     @PostMapping("")
@@ -52,6 +52,7 @@ public class ToDoController {
         ToDo toDo = toDoService.updateToDo(idToDo, toDoDto);
         return ResponseEntity.ok(ToDoDtoResponse.fromToDo(toDo));
     }
+
 
     @DeleteMapping("/{idToDo}")
     public ResponseEntity<ToDoDtoResponse> deleteToDoById(@PathVariable(name = "idToDo") Integer idToDo) {

@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 public class ToDoDtoResponse {
     private Integer id;
     private String title;
-    private Boolean isMarked;
+    private Boolean complete;
 
     public static ToDoDtoResponse fromToDo(ToDo todo) {
         return ToDoDtoResponse.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
-                .isMarked(todo.getIsMarked())
+                .complete(todo.getComplete())
                 .build();
     }
 }

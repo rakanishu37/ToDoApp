@@ -1,6 +1,6 @@
 package com.ensolvers.ToDoApp.models;
 
-import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Data
@@ -33,7 +33,7 @@ public class ToDo {
     private String title;
 
     @NotNull
-    private Boolean isMarked;
+    private Boolean complete;
 
     private LocalDate createdAt;
 
