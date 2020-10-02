@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-todo
+      author: Dev
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            tableExists:
+              tableName: todos
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: id_todo
+                  name: id_todo
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: complete
+                  type: BIT(1)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: created_at
+                  type: date
+              - column:
+                  constraints:
+                    nullable: false
+                  name: updated_at
+                  type: datetime
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+            tableName: todos
