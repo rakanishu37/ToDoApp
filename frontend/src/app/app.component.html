@@ -1,5 +1,29 @@
-<app-to-do-list [toDoList]="todos"></app-to-do-list>
+<div class="container">
+  <div class="to-do-list">
+    <h1 class="title">{{ title }}</h1>
+    <ul class="list">
+      <li *ngFor="let toDo of toDoList">
+        <app-to-do
+          [complete]="toDo.complete"
+          [title]="toDo.title"
+          (onClickCheckbox)="updateCheckbox(toDo)"
+          (onClickEdit)="onClickEditButton(toDo)"
+          (onClickDelete)="onDelete(toDo.id)"
+        ></app-to-do>
+      </li>
+    </ul>
+    <app-add-to-do
+      (onChangeTitle)="onNewTitleChange($event)"
+      (onClickAdd)="onCreate()"
+    ></app-add-to-do>
+  </div>
 
-
-
-
+  <div class="editWindow" *ngIf="isEditing">
+    <app-edit-to-do
+      [task]="previousToDo.title"
+      (onChangeTitle)="onChangeToDoTitle($event)"
+      (onClickSave)="onClickSaveButton()"
+      (onClickCancel)="cancelEditing()"
+    ></app-edit-to-do>
+  </div>
+</div>

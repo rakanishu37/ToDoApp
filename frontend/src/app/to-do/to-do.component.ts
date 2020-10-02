@@ -3,24 +3,25 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-to-do',
   templateUrl: './to-do.component.html',
-  styleUrls: ['./to-do.component.css']
+  styleUrls: ['./to-do.component.css'],
 })
 export class ToDoComponent {
-  
+  @Input() public readonly complete: boolean;
   @Input() public readonly title: string;
-  @Output() public readonly checkboxValue = new EventEmitter<MouseEvent>();  
-  @Output() public readonly edit = new EventEmitter<Event>();  
-  @Output() public readonly delete = new EventEmitter<Event>();
+  @Output() public readonly onClickCheckbox = new EventEmitter<MouseEvent>();
+  @Output() public readonly onClickEdit = new EventEmitter<Event>();
+  @Output() public readonly onClickDelete = new EventEmitter<Event>();
 
   public inputCheckboxHandler(event: MouseEvent) {
-    this.checkboxValue.emit(event);
+    event.preventDefault();
+    this.onClickCheckbox.emit(event);
   }
 
   public editHandler(event: Event) {
-    this.edit.emit(event);
+    this.onClickEdit.emit(event);
   }
 
   public deleteHandler(event: Event) {
-    this.delete.emit(event);
+    this.onClickDelete.emit(event);
   }
 }

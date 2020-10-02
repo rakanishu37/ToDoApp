@@ -20,13 +20,42 @@ export class ToDoService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private getTodoListUrl() {
+  private get todoListUrl() {
+    return `${this.baseApiUrl}/todo`;
+  }
+
+  private get postTodoUrl() {
     return `${this.baseApiUrl}/todo`;
   }
 
   //For both put & delete http requests
   private getModifyTodoUrl(id: number) {
     return `${this.baseApiUrl}/todo/${id}`;
+  }
+
+  public getToDoList() {
+    return this.httpClient.get<{ toDoList: ToDo[] }>(this.todoListUrl);
+  }
+
+  public createToDo(title: string) {
+    return this.httpClient.post<ToDo>(this.postTodoUrl, {
+      title,
+      complete: false,
+    });
+  }
+
+  public editToDo(toDo: ToDo) {
+    return this.httpClient
+      .put<ToDo>(this.getModifyTodoUrl(toDo.id), toDo, {
+        headers: this.headers,
+      })
+      .pipe(catchError(this.error));
+  }
+
+  public deleteToDo(id: number) {
+    return this.httpClient
+      .delete<ToDo>(this.getModifyTodoUrl(id))
+      .pipe(catchError(this.error));
   }
 
   // Handle Errors
@@ -39,27 +68,5 @@ export class ToDoService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  }
-
-  //public getToDos(): Observable<ToDo[]> {
-  public getToDos(): Observable<any> {
-    return this.httpClient.get(this.getTodoListUrl());
-  }
-
-  public createToDo(id: number, title: string): Observable<any> {
-    return this.httpClient.post(this.getModifyTodoUrl(id), {title});
-  }
-  
-  //public editToDo(id: Number, toDo: ToDo): Observable<ToDo> {
-  public editToDo(id: number, toDo: ToDo): Observable<any> {
-    return this.httpClient
-      .put(this.getModifyTodoUrl(id), toDo, { headers: this.headers })
-      .pipe(catchError(this.error));
-  }
-
-  public deleteToDo(id: number): Observable<any> {
-    return this.httpClient
-      .delete(this.getModifyTodoUrl(id))
-      .pipe(catchError(this.error));
   }
 }
